@@ -1,13 +1,15 @@
 .settings-menu-item {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   padding: 12px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 8px;
   background: transparent;
-  color: var(--text-primary);
+  color: var(--text-primary, #333);
   user-select: none;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Hover scale effect on menu items (0.2s ease) */
@@ -69,6 +71,9 @@
 .settings-menu-item-children {
   margin-top: 8px;
   padding-left: 32px;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .settings-menu-divider {
