@@ -42,7 +42,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, isGuest, t
 
     const timeoutId = setTimeout(() => {
       document.addEventListener('mousedown', handleClickOutside);
-    }, 100);
+    }, 250);
 
     return () => {
       clearTimeout(timeoutId);

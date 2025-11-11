@@ -103,7 +103,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
       // Delay adding the listener to avoid catching the same click that opened it
       const timeoutId = setTimeout(() => {
         document.addEventListener('mousedown', handleClickOutside);
-      }, 100);
+      }, 250);
 
       return () => {
         clearTimeout(timeoutId);
