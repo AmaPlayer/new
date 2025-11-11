@@ -85,6 +85,7 @@
 .notifications-container,
 .settings-container {
   position: relative;
+  overflow: visible;
 }
 
 .search-btn,
@@ -283,7 +284,7 @@
 /* Glass effect enhancement */
 .nav-bar {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Touch device optimizations */

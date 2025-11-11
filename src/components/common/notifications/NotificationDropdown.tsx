@@ -196,6 +196,8 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
 
   if (!isOpen) return null;
 
+  console.log('📱 NotificationDropdown rendering! Notifications:', notifications.length);
+
   return (
     <div className="notification-dropdown" ref={dropdownRef}>
       <div className="notification-header">

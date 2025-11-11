@@ -45,6 +45,7 @@ const NavigationBar = ({ currentUser, isGuest, onTitleClick, title = "AmaPlayer"
 
   const handleNotificationsToggle = (e?: React.MouseEvent) => {
     e?.stopPropagation();
+    console.log('🔔 Bell clicked! Current state:', notificationsOpen, '→ New state:', !notificationsOpen);
     setSettingsOpen(false); // Close settings if open
     setNotificationsOpen(!notificationsOpen);
   };
