@@ -8,6 +8,7 @@ import FooterNav from '../../components/layout/FooterNav';
 import SettingsMenu from '../../components/common/settings/SettingsMenu';
 import NotificationDropdown from '../../components/common/notifications/NotificationDropdown';
 import SafeImage from '../../components/common/SafeImage';
+import notificationService from '../../services/notificationService';
 import './Search.css';
 
 interface UserData {
@@ -349,7 +350,20 @@ export default function Search() {
           followingName: userName,
           timestamp: serverTimestamp()
         });
-        
+
+        // Send follow notification to the followed user
+        try {
+          await notificationService.sendFollowNotification(
+            currentUser.uid,
+            currentUser.displayName || 'Someone',
+            currentUser.photoURL || '',
+            userId
+          );
+          console.log('✅ Follow notification sent');
+        } catch (notificationError) {
+          console.error('Error sending follow notification:', notificationError);
+        }
+
         console.log(`✅ Now following ${userName}`);
       }
     } catch (error: any) {

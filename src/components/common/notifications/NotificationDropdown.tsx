@@ -167,9 +167,11 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
       case 'friend_request':
         return <UserPlus size={16} className="notification-icon follow" />;
       case 'story_view':
-      case 'story_like':
-      case 'story_comment':
         return <Eye size={16} className="notification-icon story" />;
+      case 'story_like':
+        return <Heart size={16} className="notification-icon like" />;
+      case 'story_comment':
+        return <MessageCircle size={16} className="notification-icon comment" />;
       default:
         return <Bell size={16} className="notification-icon default" />;
     }

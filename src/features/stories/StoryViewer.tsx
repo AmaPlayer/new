@@ -245,7 +245,7 @@ export default function StoryViewer({ userStories, currentStoryIndex, onClose, o
             commentText: newComment.trim()
           });
           
-          await (notificationService as any).sendStoryCommentNotification(
+          await notificationService.sendStoryCommentNotification(
             currentUser.uid,
             currentUser.displayName || 'Someone',
             currentUser.photoURL || '',

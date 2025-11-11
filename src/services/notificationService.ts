@@ -367,11 +367,11 @@ class NotificationService {
   }
 
   async sendStoryLikeNotification(
-    likerUserId: string, 
-    likerName: string, 
-    likerPhotoURL: string, 
-    storyOwnerUserId: string, 
-    storyId: string, 
+    likerUserId: string,
+    likerName: string,
+    likerPhotoURL: string,
+    storyOwnerUserId: string,
+    storyId: string,
     storyData: Partial<Story> | null = null
   ): Promise<void> {
     if (likerUserId === storyOwnerUserId) return;
@@ -392,6 +392,37 @@ class NotificationService {
       data: {
         storyId: storyId,
         type: 'story_like'
+      }
+    });
+  }
+
+  async sendStoryCommentNotification(
+    commenterUserId: string,
+    commenterName: string,
+    commenterPhotoURL: string,
+    storyOwnerUserId: string,
+    storyId: string,
+    commentText: string,
+    storyData: Partial<Story> | null = null
+  ): Promise<void> {
+    if (commenterUserId === storyOwnerUserId) return;
+
+    await this.sendNotificationToUser(storyOwnerUserId, {
+      senderId: commenterUserId,
+      senderName: commenterName,
+      senderPhotoURL: commenterPhotoURL,
+      type: 'story_comment',
+      message: `${commenterName} commented: "${commentText.substring(0, 50)}${commentText.length > 50 ? '...' : ''}"`,
+      title: 'Story Comment! 💬',
+      storyId: storyId,
+      url: `/story/${storyId}`,
+      storyMediaUrl: storyData?.mediaUrl,
+      storyMediaType: storyData?.mediaType,
+      storyThumbnail: storyData?.thumbnail,
+      storyCaption: storyData?.caption,
+      data: {
+        storyId: storyId,
+        type: 'story_comment'
       }
     });
   }

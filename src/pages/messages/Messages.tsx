@@ -12,6 +12,7 @@ import ChatHeader from '../../features/messaging/components/ChatHeader';
 import UserAvatar from '../../components/common/user/UserAvatar';
 import { navigateToProfile } from '../../utils/navigation/profileNavigation';
 import { filterChatMessage, getChatViolationMessage, logChatViolation } from '../../utils/content/chatFilter';
+import notificationService from '../../services/notificationService';
 import './Messages.css';
 
 interface FriendRequest {
@@ -915,7 +916,20 @@ export default function Messages() {
           followingName: userName,
           timestamp: serverTimestamp()
         });
-        
+
+        // Send follow notification to the followed user
+        try {
+          await notificationService.sendFollowNotification(
+            currentUser.uid,
+            currentUser.displayName || 'Someone',
+            currentUser.photoURL || '',
+            userId
+          );
+          console.log('✅ Follow notification sent');
+        } catch (notificationError) {
+          console.error('Error sending follow notification:', notificationError);
+        }
+
         console.log(`✅ Now following ${userName}`);
       }
     } catch (error: any) {

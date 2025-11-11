@@ -1,6 +1,7 @@
 import { useState, useEffect, FormEvent, ChangeEvent, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Home } from 'lucide-react';
 import ThemeToggle from '../../components/common/ui/ThemeToggle';
 import LanguageSelector from '../../components/common/forms/LanguageSelector';
 import './Auth.css';
@@ -192,8 +193,16 @@ export default function Signup() {
     setLoading(false);
   }
 
+  const handleHomeClick = (): void => {
+    // Force full page reload to ensure WelcomePage renders correctly
+    window.location.href = '/';
+  };
+
   return (
     <div className="auth-container auth-page">
+      <button className="home-btn" onClick={handleHomeClick} title="Go to Welcome Page">
+        <Home size={20} />
+      </button>
       <div className="auth-controls-only">
         <LanguageSelector />
         <ThemeToggle />
