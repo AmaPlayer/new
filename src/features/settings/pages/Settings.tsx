@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Settings as SettingsIcon, User, Shield, Eye, Bell } from 'lucide-react';
+import { Settings as SettingsIcon, User, Shield, Eye, Bell, Sun, Globe } from 'lucide-react';
 import AccountSection from '../components/AccountSection';
 import PasswordChangeSection from '../components/PasswordChangeSection';
+import SettingsMenuItem from '../../../components/common/settings/SettingsMenuItem';
+import ThemeToggle from '../../../components/common/ui/ThemeToggle';
+import LanguageSelector from '../../../components/common/forms/LanguageSelector';
 import ConfirmationDialog from '../../../components/common/ui/ConfirmationDialog';
 import LoadingSpinner from '../../../components/common/ui/LoadingSpinner';
 import { useUnsavedChanges } from '../../../hooks/useUnsavedChanges';
@@ -46,6 +49,7 @@ const Settings: React.FC<SettingsPageProps> = ({ initialTab = 'account' }) => {
 
   const tabs = [
     { id: 'account', label: 'Account', icon: User },
+    { id: 'preferences', label: 'Preferences', icon: SettingsIcon },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'privacy', label: 'Privacy', icon: Eye },
     { id: 'notifications', label: 'Notifications', icon: Bell }
@@ -82,6 +86,35 @@ const Settings: React.FC<SettingsPageProps> = ({ initialTab = 'account' }) => {
         return (
           <div className="settings-tab-content">
             <AccountSection />
+          </div>
+        );
+      case 'preferences':
+        return (
+          <div className="settings-tab-content">
+            <div className="preferences-section">
+              <h3>App Preferences</h3>
+              <p>Customize your app experience with theme and language settings.</p>
+              
+              <div className="settings-menu-items">
+                <SettingsMenuItem
+                  icon={Sun}
+                  label="Theme"
+                  showDivider={true}
+                  ariaLabel="Change theme"
+                >
+                  <ThemeToggle inline={true} showLabel={false} />
+                </SettingsMenuItem>
+
+                <SettingsMenuItem
+                  icon={Globe}
+                  label="Language"
+                  showDivider={false}
+                  ariaLabel="Change language"
+                >
+                  <LanguageSelector inline={true} showLabel={true} dropdownPosition="left" />
+                </SettingsMenuItem>
+              </div>
+            </div>
           </div>
         );
       case 'security':
