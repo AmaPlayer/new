@@ -41,13 +41,11 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({
     if (!isOpen) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-
       if (
         menuRef.current &&
-        !menuRef.current.contains(target) &&
+        !menuRef.current.contains(event.target as Node) &&
         triggerButtonRef?.current &&
-        !triggerButtonRef.current.contains(target)
+        !triggerButtonRef.current.contains(event.target as Node)
       ) {
         onClose();
       }

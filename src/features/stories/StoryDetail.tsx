@@ -248,7 +248,7 @@ export default function StoryDetail() {
       if (story.userId && story.userId !== currentUser.uid) {
         try {
           console.log('🔔 Sending story comment notification to:', story.userId);
-          await (notificationService as any).sendStoryCommentNotification(
+          await notificationService.sendStoryCommentNotification(
             currentUser.uid,
             currentUser.displayName || 'Someone',
             currentUser.photoURL || '',

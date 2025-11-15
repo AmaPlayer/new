@@ -33,7 +33,9 @@ const NavigationBar = ({ currentUser, isGuest, onTitleClick, title = "AmaPlayer"
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const notificationButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleSettingsToggle = () => {
+  const handleSettingsToggle = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setNotificationsOpen(false); // Close notifications if open
     setSettingsOpen(!settingsOpen);
   };
 
@@ -41,9 +43,11 @@ const NavigationBar = ({ currentUser, isGuest, onTitleClick, title = "AmaPlayer"
     setSettingsOpen(false);
   };
 
-  const handleNotificationsToggle = () => {
-    setNotificationsOpen(!notificationsOpen);
+  const handleNotificationsToggle = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    console.log('🔔 Bell clicked! Current state:', notificationsOpen, '→ New state:', !notificationsOpen);
     setSettingsOpen(false); // Close settings if open
+    setNotificationsOpen(!notificationsOpen);
   };
 
   const handleNotificationsClose = () => {
@@ -152,7 +156,7 @@ const NavigationBar = ({ currentUser, isGuest, onTitleClick, title = "AmaPlayer"
                 <button
                   ref={notificationButtonRef}
                   className="notification-btn"
-                  onClick={handleNotificationsToggle}
+                  onClick={(e) => handleNotificationsToggle(e)}
                   aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}
                   aria-expanded={notificationsOpen}
                   aria-haspopup="true"
@@ -183,7 +187,7 @@ const NavigationBar = ({ currentUser, isGuest, onTitleClick, title = "AmaPlayer"
               <button
                 ref={settingsButtonRef}
                 className="settings-btn"
-                onClick={handleSettingsToggle}
+                onClick={(e) => handleSettingsToggle(e)}
                 aria-label="Open settings menu"
                 aria-expanded={settingsOpen}
                 aria-haspopup="true"

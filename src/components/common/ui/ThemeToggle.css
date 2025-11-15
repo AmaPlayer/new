@@ -50,11 +50,13 @@
 
 /* Inline variant styles */
 .theme-toggle-inline-container {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 8px 0;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .theme-toggle-label {
@@ -64,11 +66,13 @@
 }
 
 .theme-toggle-switch {
-  display: flex;
+  display: flex !important;
   gap: 8px;
-  background: var(--bg-hover);
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
   border-radius: 8px;
   padding: 4px;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .theme-toggle-option {
