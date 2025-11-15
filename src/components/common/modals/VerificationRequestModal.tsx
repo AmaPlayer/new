@@ -166,8 +166,8 @@ const VerificationRequestModal: React.FC<VerificationRequestModalProps> = ({ isO
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay verification-modal-overlay">
-      <div className="modal-content verification-modal-content">
+    <div className="modal-overlay verification-modal-overlay" onClick={onClose}>
+      <div className="modal-content verification-modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>
             {step === 1 && 'Request Verification'}

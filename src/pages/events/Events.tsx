@@ -162,10 +162,7 @@ export default function Events() {
       'Community Sports': '#a29bfe',
       'Environment': '#00b894'
     };
-    return colors[category] || '#74b9ff';
-  };
 
-  if (loading) {
     return (
       <div className="events">
         <NavigationBar
@@ -194,22 +191,216 @@ export default function Events() {
         title="Events"
       />
 
-      <div className="main-content events-content">
-        {/* Page Header */}
-        <div className="events-header">
-          <div className="header-content">
-            <Calendar size={32} className="header-icon" />
-            <div className="header-text">
-              <h1>Sports Events & Championships</h1>
-              <p>Stay updated with the latest sporting events, championships, and news from around the world</p>
-              {hasFirebaseEvents && (
-                <div className="firebase-events-indicator">
-                  <span className="live-indicator">● </span>
-                  <span style={{color: '#10b981', fontSize: '14px'}}>Live events from admin dashboard</span>
                 </div>
-              )}
+
+                <img className="rectangle-3" alt="Rectangle" src={rectangle88} />
+
+                <div className="text-wrapper-4">Upcoming Events</div>
+
+                <p className="choose-your-sport">
+                    Choose your sport and participate to win prize, popularity &amp; to
+                    catch the eye of selecting scout.
+                </p>
+
+                <div className="frame-2">
+                    <div className={`div-wrapper filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => handleFilterClick('ALL')}>
+                        <div className="text-wrapper-5">ALL</div>
+                    </div>
+
+                    <div className={`frame-3 filter-btn ${activeFilter === 'Cricket' ? 'active' : ''}`} onClick={() => handleFilterClick('Cricket')}>
+                        <div className="text-wrapper-6">Cricket</div>
+                    </div>
+
+                    <div className={`frame-3 filter-btn ${activeFilter === 'Athlete' ? 'active' : ''}`} onClick={() => handleFilterClick('Athlete')}>
+                        <div className="text-wrapper-7">Athlete</div>
+                    </div>
+
+                    <div className={`frame-4 filter-btn ${activeFilter === 'Badminton' ? 'active' : ''}`} onClick={() => handleFilterClick('Badminton')}>
+                        <div className="text-wrapper-8">Badminton</div>
+                    </div>
+
+                    <div className={`frame-5 filter-btn ${activeFilter === 'More' ? 'active' : ''}`} onClick={() => handleFilterClick('More')}>
+                        <div className="text-wrapper-9">More</div>
+                    </div>
+                </div>
+
+                <div className="overlap-2">
+                    <div className="overlap-3">
+                        <div className="text-wrapper-10">PUMA</div>
+
+                        <div className="simple-icons-puma">
+                            <img className="vector-9" alt="Puma Logo" src={pumaLogo} />
+                        </div>
+                    </div>
+
+                    <p className="september-sunday">
+                        September 9, Sunday
+                        <br />
+                        Morning 10:00 AM
+                    </p>
+
+                    <p className="MPL-cricket-ground">
+                        MPL Cricket ground
+                        <br />
+                        Nangla Tashi, Kankerkheda
+                        <br />
+                        Meerut, Uttar Pradesh
+                    </p>
+
+                    <img className="rectangle-4" alt="Cricket Event" src={rectangle95} />
+
+                    <div className="frame-6">
+                        <div className="text-wrapper-11">Weekend Cricket Championship</div>
+                    </div>
+
+                    <img
+                        className="clarity-date-line"
+                        alt="Calendar Icon"
+                        src={calendarIcon}
+                    />
+
+                    <div className="mdi-location">
+                        <img className="vector-10" alt="Location Icon" src={locationIcon} />
+                    </div>
+
+                    <div className="overlap-4">
+                        <div className="text-wrapper-12">Sponsored by</div>
+                    </div>
+
+                    <div className="frame-7">
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">1st Prize</div>
+                        </div>
+
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">2nd Prize</div>
+                        </div>
+
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">3rd Prize</div>
+                        </div>
+                    </div>
+
+                    <img className="rectangle-5" alt="1st Prize" src={rectangle101} />
+
+                    <img className="rectangle-6" alt="2nd Prize" src={rectangle102} />
+
+                    <img className="rectangle-7" alt="3rd Prize" src={rectangle103} />
+
+                    <div className="frame-9 clickable" onClick={() => handleRegisterClick('Weekend Cricket Championship')}>
+                        <div className="text-wrapper-14">Register Now</div>
+                    </div>
+                </div>
+
+                <div className="overlap-5">
+                    <div className="rectangle-8" />
+
+                    <div className="text-wrapper-15">NIKE</div>
+
+                    <p className="p">
+                        September 15, Sunday
+                        <br />
+                        Morning 10:00 AM
+                    </p>
+
+                    <div className="bhagat-singh-ground">
+                        Bhagat Singh Ground
+                        <br />
+                        Modipuram,Meerut
+                        <br />
+                        Uttar Pradesh
+                    </div>
+
+                    <img className="rectangle-9" alt="Running Event" src={rectangle96} />
+
+                    <div className="frame-10">
+                        <div className="text-wrapper-11">100 Meter Running Challenge</div>
+                    </div>
+
+                    <img
+                        className="clarity-date-line-2"
+                        alt="Calendar Icon"
+                        src={calendarIcon}
+                    />
+
+                    <div className="vector-wrapper">
+                        <img className="vector-10" alt="Location Icon" src={locationIcon} />
+                    </div>
+
+                    <div className="rectangle-10" />
+
+                    <div className="text-wrapper-16">Sponsored by</div>
+
+                    <div className="frame-11">
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">1st Prize</div>
+                        </div>
+
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">2nd Prize</div>
+                        </div>
+
+                        <div className="frame-8">
+                            <div className="game-icons-target">
+                                <img className="vector-11" alt="Target Icon" src={targetIcon} />
+                            </div>
+
+                            <div className="text-wrapper-13">3rd Prize</div>
+                        </div>
+                    </div>
+
+                    <img className="rectangle-11" alt="1st Prize" src={rectangle101} />
+
+                    <img className="rectangle-12" alt="2nd Prize" src={rectangle102} />
+
+                    <img className="rectangle-13" alt="3rd Prize" src={rectangle103} />
+
+                    <div className="frame-12 clickable" onClick={() => handleRegisterClick('100 Meter Running Challenge')}>
+                        <div className="text-wrapper-14">Register Now</div>
+                    </div>
+
+                    <div className="hugeicons-nike">
+                        <img className="vector-12" alt="Nike Logo" src={nikeLogo} />
+                    </div>
+                </div>
+
+                <div className="overlap-6">
+                    <div className="rectangle-14-container">
+                        <img className="rectangle-14-flag" alt="Background" src={rectangle104} />
+                        <img className="rectangle-14" alt="Join AmaPlayer" src={rectangle105} />
+                    </div>
+
+                    <div className="text-wrapper-17">Participate</div>
+
+                    <div className="text-wrapper-18">with AmaPlayer</div>
+
+                    <div className="text-wrapper-19">&amp;</div>
+
+                    <div className="text-wrapper-20">Win</div>
+                </div>
             </div>
-          </div>
+            
+            <FooterNav />
         </div>
 
         {/* Sports News Section */}

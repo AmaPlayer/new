@@ -1,7 +1,7 @@
 /* Messages Page Styles */
 .messages {
   min-height: 100vh;
-  background: var(--bg-primary);
+  background-color: #ffffff;
   background-attachment: fixed;
   overflow-y: auto;
   font-family: var(--font-family-primary);

@@ -1,7 +1,7 @@
 // Verification Badge Component - Shows verification status next to profile image
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import VerificationService from '../../../services/api/verificationService';
+import VerificationService from '../../../pages/verification/verificationService';
 import ShareVerificationModal from '../modals/ShareVerificationModal';
 import './VerificationBadge.css';
 

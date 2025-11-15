@@ -8,9 +8,8 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { uploadVideoFile, generateVideoMetadata, VIDEO_PATHS } from '../../services/api/videoService';
-import ThemeToggle from '../../components/common/ui/ThemeToggle';
-import LanguageSelector from '../../components/common/forms/LanguageSelector';
 import FooterNav from '../../components/layout/FooterNav';
+import AppHeader from '../../components/layout/AppHeader';
 import { errorTracker, getErrorSolution } from '../../utils/debug/errorTracker';
 import { filterPostContent, getPostViolationMessage, logPostViolation } from '../../utils/content/postContentFilter';
 import { validateImageContent } from '../../utils/content/imageContentFilter';
@@ -622,26 +621,12 @@ export default function AddPost(): React.JSX.Element {
 
   return (
     <div className="add-post">
-      <nav className="nav-bar">
-        <div className="nav-content">
-          <button onClick={() => navigate('/home')} className="back-btn">
-            <ArrowLeft size={20} />
-            Cancel
-          </button>
-          <h1>
-            {t('createPost')}
-            {isOffline && (
-              <span className="offline-indicator">
-                <WifiOff size={16} /> Offline Mode
-              </span>
-            )}
-          </h1>
-          <div className="nav-controls">
-            <LanguageSelector />
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      <AppHeader 
+        title={isOffline ? `${t('createPost')} - Offline Mode` : t('createPost')} 
+        showBackButton={true}
+         
+        showThemeToggle={true} 
+      />
 
       <NetworkStatus />
 

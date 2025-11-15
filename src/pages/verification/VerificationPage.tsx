@@ -90,9 +90,18 @@ const VerificationPage: React.FC = () => {
       const stats = await VerificationService.getVerificationStats(verificationId!);
       setVerificationStats(stats);
       
-      // Check if user has already verified (basic IP check will be done on submit)
+      // Check if device has already verified using device fingerprinting
+      const deviceId = DeviceFingerprint.getDeviceId();
+      const hasVerifiedFromDevice = data.verifiedDevices && data.verifiedDevices.includes(deviceId);
       const hasVerifiedFromStorage = localStorage.getItem(`verified_${verificationId}`);
-      setHasVerified(!!hasVerifiedFromStorage);
+      setHasVerified(hasVerifiedFromDevice || !!hasVerifiedFromStorage);
+      
+      console.log('🔍 Device verification check:', {
+        deviceId: deviceId.substring(0, 12) + '...',
+        hasVerifiedFromDevice,
+        hasVerifiedFromStorage: !!hasVerifiedFromStorage,
+        totalVerified: data.verifiedDevices?.length || 0
+      });
       
     } catch (error) {
       console.error('Error fetching verification data:', error);
@@ -113,14 +122,16 @@ const VerificationPage: React.FC = () => {
         ip: 'browser_ip', // Will be determined server-side
         userAgent: navigator.userAgent,
         referrer: document.referrer,
-        timestamp: new Date()
+        timestamp: new Date(),
+        deviceFingerprint: deviceInfo.fingerprint
       };
       
       const result: VerificationResult = await VerificationService.submitVerification(verificationId!, voterInfo);
       
       if (result.success) {
-        // Mark as verified in local storage
+        // Mark as verified in local storage (backup check)
         localStorage.setItem(`verified_${verificationId}`, 'true');
+        localStorage.setItem(`device_verified_${verificationId}`, deviceId);
         setHasVerified(true);
         
         // Update stats
@@ -132,11 +143,18 @@ const VerificationPage: React.FC = () => {
           isComplete: result.isComplete
         }) : null);
         
-        // Show success message
+        console.log('✅ Verification successful:', {
+          newCount: result.newCount,
+          remaining: result.remaining,
+          isComplete: result.isComplete,
+          deviceId: result.deviceId
+        });
+        
+        // Show success message with device info
         if (result.isComplete) {
-          alert(`🎉 Congratulations! ${verificationData.userDisplayName} is now verified!`);
+          alert(`🎉 Congratulations! ${verificationData.userDisplayName} is now verified!\nDevice: ${deviceInfo.browser.name} on ${deviceInfo.browser.platform}`);
         } else {
-          alert(`✅ Thank you for verifying! ${result.remaining} more verification${result.remaining !== 1 ? 's' : ''} needed.`);
+          alert(`✅ Thank you for verifying from ${deviceInfo.browser.name}!\n${result.remaining} more verification${result.remaining !== 1 ? 's' : ''} needed.`);
         }
       }
     } catch (error: any) {
@@ -195,7 +213,6 @@ const VerificationPage: React.FC = () => {
   }
 
   const isComplete = verificationStats?.isComplete;
-  const progress = verificationStats ? (verificationStats.current / verificationStats.goal) * 100 : 0;
 
   return (
     <div className="verification-page">
@@ -266,12 +283,6 @@ const VerificationPage: React.FC = () => {
               </div>
             </div>
             
-            <div className="progress-bar">
-              <div 
-                className="progress-fill" 
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
             
             <div className="progress-text">
               {isComplete ? (
@@ -286,6 +297,34 @@ const VerificationPage: React.FC = () => {
                 </span>
               )}
             </div>
+
+            {/* Device Info Display */}
+            {!isComplete && (
+              <div className="device-info">
+                <div className="device-info-header">
+                  <Smartphone size={16} />
+                  <span>Device Tracking</span>
+                </div>
+                <div className="device-details">
+                  {(() => {
+                    const deviceInfo = DeviceFingerprint.getDeviceInfo();
+                    return (
+                      <div className="device-details-content">
+                        <span className="device-item">
+                          🌐 {deviceInfo.browser.name} on {deviceInfo.browser.platform}
+                        </span>
+                        <span className="device-item">
+                          📱 {deviceInfo.system.screen} • {deviceInfo.system.timezone}
+                        </span>
+                        <span className="device-note">
+                          One verification per device to prevent spam
+                        </span>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            )}
 
             {/* Verification Button */}
             {!isComplete && (
